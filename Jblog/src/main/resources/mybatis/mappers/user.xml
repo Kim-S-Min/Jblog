@@ -6,12 +6,13 @@
 	<insert id="insert" parameterType="userVo">
 	<![CDATA[
 	INSERT INTO users (
-		userNo, id, userName, password)
+		userNo, id, userName, password, joinDate)
 	VALUES(
 		seq_users_no.nextval,
 		#{id}, 
 		#{userName},
-		#{password}
+		#{password},
+		sysdate
 	)
 	]]>
 	</insert>
