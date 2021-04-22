@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="blog">
+	<select id="getPage" parameterType="String" resultType="userVo" >
+		<![CDATA[
+		SELECT userNo, userName, id
+		FROM users
+		WHERE id = #{value}
+		]]>
+	</select>
+	
+	<select id="getPost" parameterType="Long" resultType="postVo">
+		<![CDATA[
+		SELECT postTitle, postContent, post.regDate as regDate, post.cateNo
+		FROM post, category
+		WHERE category.userNo = ${value} AND post.cateNo = category.cateNo
+		ORDER BY postNo DESC
+		]]>
+	</select>
+	
+	<select id="selectCategory" parameterType = "Long" resultType = "categoryVo">
+		<![CDATA[
+		SELECT cateName, userNo ,cateNo, description, regDate
+		FROM category
+		WHERE userNo = #{value}
+		]]>
+	</select>
+	
+	<select id="adminBlog" parameterType="String" resultType="blogVo">
+		<![CDATA[
+		SELECT userNo, blogTitle, logoFile
+		FROM blog
+		WHERE userNo = (SELECT userNo FROM users WHERE id = #{value})
+		]]>
+	</select>
+	
+	<select id="adminBlog" parameterType="Long" resultType="blogVo">
+		<![CDATA[
+		SELECT userNo, blogTitle, logoFile
+		FROM blog
+		WHERE userNo = #{value}
+		]]>
+	</select>
+	
+	<update id="update" parameterType="blogVo">
+		<![CDATA[
+		UPDATE blog
+		SET blogTitle=#{blogTitle}
+		WHERE userNo = #{userNo}
+		]]>
+	</update>
+	
+	<insert id="insertCate" parameterType="categoryVo">
+		<![CDATA[
+		INSERT INTO category
+		VALUES(SEQ_CATEGORY_NO.NEXTVAL, #{userNo}, #{cateName}, #{description}, sysdate)
+		]]>
+	</insert>
+	
+	<insert id="write" parameterType="postVo">
+		<![CDATA[
+		INSERT INTO post
+		VALUES(SEQ_PoST_NO.NEXTVAL, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+		]]>
+	</insert>
+	
+</mapper>

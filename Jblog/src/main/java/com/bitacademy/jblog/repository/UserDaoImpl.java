@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.bitacademy.jblog.exception.UserDaoException;
 import com.bitacademy.jblog.vo.UserVo;
 
-@Repository("userDao")
+@Repository
 public class UserDaoImpl implements UserDao {
 	//	Logger
 	private static Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
@@ -26,10 +26,27 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			insertedCount = sqlSession.insert("users.insert", vo);
+			logger.debug("sqlSession:" + insertedCount);
 		} catch (Exception e) {
-			logger.error("예외 발생:" + e.getMessage());
-			throw new UserDaoException("회원 가입 중 오류 발생!", vo);
+			logger.error("exception:" + e.getMessage());
+			throw new UserDaoException("회원 가입 중 오류 발생", vo);
 		}
+		return insertedCount;
+	}
+	
+	@Override
+	public int createBlog(UserVo vo) {
+		int insertedCount = 0;
+		insertedCount = sqlSession.insert("users.createblog", vo);
+		
+		return insertedCount;
+	}
+	
+	@Override
+	public int createCategory(UserVo vo) {
+		int insertedCount = 0;
+		insertedCount = sqlSession.insert("users.createcategory", vo);
+		
 		return insertedCount;
 	}
 

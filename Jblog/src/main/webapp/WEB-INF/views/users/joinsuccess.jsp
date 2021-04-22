@@ -23,10 +23,5 @@
 		<a href="<c:url value="/users/login"/>">로그인하기</a>
 	</p>
 
-				</div>
-			</div>
-		</div>
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
-	</div>
 </body>
 </html>

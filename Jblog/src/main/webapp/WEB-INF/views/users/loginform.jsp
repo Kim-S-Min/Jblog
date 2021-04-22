@@ -23,20 +23,14 @@
 		action="<c:url value="/users/login"/>">
 		
 		<label class="block-label" for="id">아이디</label> 
-		<input id="id" name="id" type="text" value=""> 
+		<input id="id" name="id" type="text" value=""><br>
 
 		<label class="block-label">패스워드</label> 
-		<input name="password" type="password" value="">
+		<input name="password" type="password" value=""><br>
 
 		<input type="submit" value="로그인">
 	</form> 
 	
-	
-	
-    				</div>
-			</div>
-		</div>
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
-	</div>
+
 </body>
 </html>

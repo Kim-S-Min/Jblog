@@ -12,8 +12,26 @@
 		#{id}, 
 		#{userName},
 		#{password},
-		sysdate
-	)
+		sysdate)
+	]]>
+	</insert>
+	
+	<insert id="createblog" parameterType="userVO">
+	<![CDATA[
+	INSERT INTO blog(userNo, blogTitle, logoFile)
+	VALUES( #{userNo}, concat(#{userName}, '의 블로그 입니다'), null)
+	]]>
+	</insert>
+	
+	<insert id="createcategory" parameterType="userVO">
+	<![CDATA[
+	INSERT INTO category(cateNo, userNo, cateName, description, regDate)
+	VALUES(
+		seq_category_no.nextval ,
+		#{userNo}, 
+		'미분류', 
+		'기본으로 만들어지는 카테고리 입니다.', 
+		sysdate)
 	]]>
 	</insert>
 	
@@ -21,7 +39,8 @@
 		parameterType="String"
 		resultType="userVo">
 	<![CDATA[
-	SELECT userNo, id, userName, FROM users
+	SELECT userNo, id, userName, password
+	FROM users
 	WHERE id = #{value}
 	]]>	
 	</select>

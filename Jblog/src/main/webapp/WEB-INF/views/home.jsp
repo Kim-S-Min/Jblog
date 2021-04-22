@@ -9,16 +9,14 @@
 <title>JBlog</title>
 </head>
 <body>
-	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
-		<div id="wapper">
-			<div id="content">
-				<div id="site-introduction">
-				</div>
-			</div>
-		</div>
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
-	</div>
+
+	<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+	
+	<form>
+		<input type = "txet">
+		<input class="btn btn-secondary" type = "submit" value = "검색"> <br>
+		<input type = "radio" name = "searchcate" value="blogName"> 블로그제목
+		<input type = "radio" name = "searchcate" value="bloger"> 블로거
+	</form>
 </body>
 </html>

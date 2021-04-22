@@ -38,17 +38,22 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/manager/**" />
+			<mvc:mapping path="/*/admin/**" />
 			<bean class="com.bitacademy.jblog.interceptors.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<!-- MessageSource -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<!-- 메시지 소스의 위치 -->
-		<property name="basenames" value="messages/messages_ko" />	
-		<property name="defaultEncoding" value="UTF-8" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 업드로 할 수 있는 최대 파일 용량: 10MB -->
+		<property name="maxUploadSize" value="10485760" />
+		<!-- 파일 인코딩 정보 -->
+		<property name="defaultEncoding" value="utf-8" />
 	</bean>
+	
+	<!-- Resource Mapping -->
+	<!-- 실제요청 url과 실제디렉터리를 매핑(연결) -->
+	<mvc:resources mapping="/upload-images/**"
+		location="file:D:/upload/" />
 
 </beans>

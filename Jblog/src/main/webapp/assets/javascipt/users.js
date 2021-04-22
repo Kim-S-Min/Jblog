@@ -41,10 +41,10 @@ function checkid(idFiel, url) {
 			console.log("Result:", result);
 			if (result.data == true) {
 				idField.form.check.value = "f";
-				alert("다른 아이디로 가입해 주세요");
+				document.getElementsByName("msg_id").textContext="다른 아이디로 가입해 주세요";
 			} else {
 				idField.form.check.value = "t";
-				alert("사용할 수 있는 아이디 입니다");
+				document.getElementsByName("msg_id").textContext="사용할 수 있는 아이디 입니다";
 			}
 		},
 		error: function(xhr, status, error) {

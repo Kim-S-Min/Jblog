@@ -15,7 +15,7 @@
 		<div id="wapper">
 			<div id="content">
 				<div id="site-introduction">
-					<h1>OOPS!</h1>
+					<h1>Error</h1>
 					
 					<h2>Error 발생!</h2>
 					<h3>${ name }</h3>
