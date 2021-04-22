@@ -6,13 +6,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-	<!-- 컴포넌트 스캔 등록 -->
 	<context:annotation-config />
 	<context:component-scan 
 		base-package="com.bitacademy.jblog.service
 						com.bitacademy.jblog.repository
 						com.bitacademy.jblog.exception">
-		<!-- Service, Repository만 검색 -->
 		<context:include-filter 
 			type="annotation" 
 			expression="org.springframework.stereotype.Service"/>
@@ -24,7 +22,7 @@
 			expression="org.springframework.stereotype.Component" />
 	</context:component-scan>
 
-	<!-- Oracle Data Source -->
+
 	<bean id="oracleDataSource"
 		class="oracle.jdbc.pool.OracleDataSource"
 		destroy-method="close">
@@ -36,15 +34,14 @@
 		<qualifier value="main-db" />
 	</bean>	
 		
-	<!-- MyBatis SqlSessionFactoryBean 등록 -->
+
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource"	ref="oracleDataSource" />
-		<!-- 설정 파일 -->
 		<property name="configLocation" value="classpath:mybatis/configuration.xml" />
 	</bean>
 	
-	<!-- MyBatis SqlSessionTemplate 등록 -->
+
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />	

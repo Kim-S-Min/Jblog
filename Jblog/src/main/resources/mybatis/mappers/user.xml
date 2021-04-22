@@ -17,8 +17,7 @@
 	]]>
 	</insert>
 	
-	<!-- 이메일 중복 체크용 SELECT -->
-	<select id="selectUserByEmail"
+	<select id="selectUserById"
 		parameterType="String"
 		resultType="userVo">
 	<![CDATA[
@@ -27,8 +26,7 @@
 	]]>	
 	</select>
 	
-	<!-- 로그인용 SELECT -->
-	<select id="selectUserByEmailAndPassword"
+	<select id="selectUserByIdAndPassword"
 		parameterType="map"
 		resultType="userVo">
 	<![CDATA[
