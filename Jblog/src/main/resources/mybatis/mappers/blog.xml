@@ -28,6 +28,14 @@
 		]]>
 	</select>
 	
+	<select id="getPostCount" parameterType="Long" resultType ="Long">
+		<![CDATA[
+		SELECT COUNT(postTitle)
+		FROM post
+		WHERE cateNo = #{value}
+		]]>
+	</select>
+	
 	<select id="adminBlog" parameterType="String" resultType="blogVo">
 		<![CDATA[
 		SELECT userNo, blogTitle, logoFile
@@ -36,7 +44,7 @@
 		]]>
 	</select>
 	
-	<select id="adminBlog" parameterType="Long" resultType="blogVo">
+	<select id="adminBlog1" parameterType="Long" resultType="blogVo">
 		<![CDATA[
 		SELECT userNo, blogTitle, logoFile
 		FROM blog
@@ -66,4 +74,34 @@
 		]]>
 	</insert>
 	
+	<delete id = "deleteCate" parameterType = "Long">
+		<![CDATA[
+		DELETE
+		FROM category
+		WHERE cateNo = #{value}
+		]]>
+	</delete>
+	
+		<insert id ="insertComments" parameterType = "CommentsVo">
+		<![CDATA[
+		INSERT INTO comments
+		VALUES (SEQ_COMMENTS_NO.NEXTVAL, #{postNo},#{userNo}, #{cmtContent}, sysdate)
+		]]>
+	</insert>
+	
+	<delete id ="deleteComments" parameterType = "Long">
+		<![CDATA[
+		DELETE
+		FROM comments
+		WHERE cmtNo = #{value}
+		]]>
+	</delete>
+	
+	<select id="getComments" parameterType = "Long" resultType = "commentsVo">
+		<![CDATA[
+		SELECT userNo, cmtContent, regDate, cmtNo
+		FROM comments
+		WHERE postNo = #{value}
+		]]>
+	</select>
 </mapper>

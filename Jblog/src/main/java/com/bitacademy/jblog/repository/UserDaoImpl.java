@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 	private static Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
 	@Autowired
-	private SqlSession sqlSession;
+	SqlSession sqlSession;
 	
 	@Override
 	public int insert(UserVo vo) {
@@ -37,16 +37,22 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int createBlog(UserVo vo) {
 		int insertedCount = 0;
-		insertedCount = sqlSession.insert("users.createblog", vo);
-		
+		try {
+			insertedCount = sqlSession.insert("users.createblog", vo);
+		} catch(Exception e) {
+			throw new UserDaoException("createBlog exception");
+		}
 		return insertedCount;
 	}
 	
 	@Override
 	public int createCategory(UserVo vo) {
 		int insertedCount = 0;
-		insertedCount = sqlSession.insert("users.createcategory", vo);
-		
+		try {
+			insertedCount = sqlSession.insert("users.createcategory", vo);
+		} catch(Exception e) {
+			throw new UserDaoException("createBlog exception");
+		}
 		return insertedCount;
 	}
 
@@ -56,14 +62,39 @@ public class UserDaoImpl implements UserDao {
 		userMap.put("id", id);
 		userMap.put("password", password);
 		
-		UserVo vo = sqlSession.selectOne("users.selectUserByIdAndPass", userMap);
+		UserVo vo = null;
+		
+		try {
+			vo = sqlSession.selectOne("users.selectUserByIDAndPassword", userMap);
+		}catch(Exception e){
+			throw new UserDaoException("selectUser By id and password exception");
+		}
+		
 		return vo;
 	}
 
 	@Override
 	public UserVo selectUser(String id) {
-		UserVo vo = sqlSession.selectOne("users.selectUserById", id);
-		return null;
+		UserVo vo = null; 
+		
+		try {
+			vo = sqlSession.selectOne("users.selectUserByID", id);
+		}catch(Exception e){
+			throw new UserDaoException("selectUser By ID exception");
+		}	
+		
+		return vo;
+	}
+	
+	@Override
+	public String selectUserName(Long no) {
+		String name = "";
+		try {
+			name = sqlSession.selectOne("users.selectUserByNo", no);
+		} catch(Exception e) {
+			throw new UserDaoException("selectUserName exception");
+		}
+		return name;
 	}
 
 }

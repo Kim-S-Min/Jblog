@@ -9,21 +9,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
-		<div id="wapper">
+	<div id = "container">
+		<div id = "wapper">
 			<div id="content">
 				<div id="site-introduction">
-					<h1>Error</h1>
+					<h1>OOPS!</h1>
 					
 					<h2>Error 발생!</h2>
-					<h3>${ name }</h3>
-					<p>${ message }</p>
+					<h3>${name }</h3>
+					<p>${message }</p>
 				</div>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>

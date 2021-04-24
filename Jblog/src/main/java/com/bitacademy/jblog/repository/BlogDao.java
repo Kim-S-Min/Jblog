@@ -10,9 +10,6 @@ public interface BlogDao {
 	public BlogVo getBlogAdmin(String id);
 	public BlogVo getBlogAdmin(Long no);
 	public BlogVo getPage(String id);
-	public List<PostVo> getPost(Long no);
-	public List<CategoryVo> getCate(Long no);
-	public int update(BlogVo vo);
-	public int insertCate(CategoryVo vo);
-	public int write(PostVo vo);
+	public int update(BlogVo vo);	
+	public int updateLogo(BlogVo vo);
 }

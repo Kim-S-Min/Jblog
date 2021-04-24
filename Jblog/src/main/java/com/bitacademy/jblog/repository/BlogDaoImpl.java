@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.bitacademy.jblog.vo.BlogVo;
 import com.bitacademy.jblog.vo.CategoryVo;
 import com.bitacademy.jblog.vo.PostVo;
 
+@Repository
 public class BlogDaoImpl implements BlogDao {
 	@Autowired
 	SqlSession sqlSession;
@@ -21,7 +23,7 @@ public class BlogDaoImpl implements BlogDao {
 
 	@Override
 	public BlogVo getBlogAdmin(Long no) {
-		BlogVo vo = sqlSession.selectOne("blog.adminBlog", no);
+		BlogVo vo = sqlSession.selectOne("blog.adminBlog1", no);
 		return vo;
 	}
 
@@ -32,33 +34,16 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public List<PostVo> getPost(Long no) {
-		List<PostVo> list = sqlSession.selectList("blog.getPost", no);
-		return list;
-	}
-
-	@Override
-	public List<CategoryVo> getCate(Long no) {
-		List<CategoryVo> list = sqlSession.selectList("blog.selectCategory", no);
-		return list;
-	}
-
-	@Override
 	public int update(BlogVo vo) {
 		int updatedCount = sqlSession.update("blog.update", vo);
 		return updatedCount;
 	}
-
+	
 	@Override
-	public int insertCate(CategoryVo vo) {
-		int insertedCount = sqlSession.insert("blog.insertCate", vo);
-		return insertedCount;
+	public int updateLogo(BlogVo vo) {
+		int updatedCount = sqlSession.update("blog.updateLogo", vo);
+		return updatedCount;
 	}
 
-	@Override
-	public int write(PostVo vo) {
-		int writedCount = sqlSession.insert("blog.wirte", vo);
-		return writedCount;
-	}
 
 }

@@ -8,13 +8,12 @@
 <meta charset="UTF-8">
 <title>JBlog</title>
 </head>
+<script src = "<c:url value="/assets/javascript/jquery/jquery-3.6.0.js"/>"></script>
+<script src = "<c:url value="/assets/javascript/users.js"/>"></script>
 <body>
-	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
-		<div id="wapper">
-			<div id="content">
-				<div id="site-introduction">
+
+	<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+
 				
 				
 	<form id="login-form" 
@@ -28,9 +27,18 @@
 		<label class="block-label">패스워드</label> 
 		<input name="password" type="password" value=""><br>
 
-		<input type="submit" value="로그인">
+
+		<div>${message1}</div>
+		<div>${message2}</div>
+		<input class = "btn btn-secondary" 
+			type="submit" 
+			value="로그인" 
+			onclick="okay(this.form.id, this.form.password, 
+			'<c:url value="/users/logincheck"/>')">
 	</form> 
 	
+
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 
 </body>
 </html>

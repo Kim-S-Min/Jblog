@@ -9,19 +9,10 @@
 <title>JBlog</title>
 </head>
 <body>
-	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
-		<div id="wapper">
-			<div id="content">
-				<div id="site-introduction">
+	<jsp:include page="/WEB-INF/views/includes/header.jsp" />	
 				
-	<p class="jr-success">
-		"감사합니다. 회원 가입 및 블로그가 성공적으로 만들어 졌습니다."
-	</p>
-	<p>
-		<a href="<c:url value="/users/login"/>">로그인하기</a>
-	</p>
+	<h2>"감사합니다. 회원 가입 및 블로그가 성공적으로 만들어 졌습니다."</h2>
+	<p><a href="<c:url value="/users/login"/>">로그인하기</a></p>
 
 </body>
 </html>

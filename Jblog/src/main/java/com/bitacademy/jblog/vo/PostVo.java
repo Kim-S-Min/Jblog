@@ -8,6 +8,7 @@ public class PostVo {
 	private String postTitle;
 	private String postContent;
 	private Date regDate;
+	private Long postCount;
 	
 	//	Getter/Setter
 	public Long getPostNo() {
@@ -40,11 +41,18 @@ public class PostVo {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
+
+	public Long getPostCount() {
+		return postCount;
+	}
+	public void setPostCount(Long postCount) {
+		this.postCount = postCount;
+	}
+
 	//	toString
 	@Override
 	public String toString() {
 		return "PostVo [postNo=" + postNo + ", cateNo=" + cateNo + ", postTitle=" + postTitle + ", postContent="
-				+ postContent + ", regDate=" + regDate + "]";
+				+ postContent + ", regDate=" + regDate + ", postCount=" + postCount + "]";
 	}
 }

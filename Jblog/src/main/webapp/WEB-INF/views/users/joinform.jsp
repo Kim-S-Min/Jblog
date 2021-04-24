@@ -10,16 +10,11 @@
 <meta charset="UTF-8">
 <title>JBlog</title>
 </head>
+<script src = "<c:url value="/assets/javascript/jquery/jquery-3.6.0.js"/>"></script>
+<script src = "<c:url value="/assets/javascript/users.js"/>"></script>
 <body>
-	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
-		<div id="wapper">
-			<div id="content">
-				<div id="site-introduction">
-				
-	<h1>회원 가입</h1>
-	
+	<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+		
 	<form
 		id="join-form"
 		name="registerForm" 
@@ -34,17 +29,18 @@
 		
 		<label for="id">아이디</label>
 		<input type="text" name="id" placeholder="아이디를 입력해주세요">
-		<input type="button" 
-			value="id 중복체크" 
-			onclick="checkid(this.form.id, '<c:url value="/users/idcheck" />')" /><br>
+		<<input class = "btn btn-secondary" type="button" value="중복체크" onclick="checkId(this.form.id,'<c:url value="/users/idcheck"/>')">
+		<div id = "msg_id"></div>
 	
 		<label for="password">비밀번호</label>
 		<input name="password" type="password" placeholder="비밀번호를 입력해주세요"><br>
 		
 		<label for="agree">약관동의</label><br>
-		<input type="radio" name="agree" value="Yes" >서비스 약관에 동의합니다</radio><br>
-		<input type="submit" value="회원가입">	
+		<input type="checkbox" name="agree" value="Yes" >서비스 약관에 동의합니다</radio><br>
+		<input class = "btn btn-secondary" type="submit" value="회원가입">
 	</form>
-		
+
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
+
 </body>
 </html>

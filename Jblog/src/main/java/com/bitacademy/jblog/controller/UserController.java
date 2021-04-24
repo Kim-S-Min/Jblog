@@ -29,7 +29,7 @@ public class UserController {
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private UserService userService;
+	UserService userService;
 	
 
 	@RequestMapping(value = {"", "/", "/join"}, method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping("/idcheck")
-	public Object existsEmail(@RequestParam(value = "id", required = false, defaultValue = "") String id) {
+	public Object existsId(@RequestParam(value = "id", required = false, defaultValue = "") String id) {
 		UserVo vo = userService.getUser(id);
 		boolean exists = vo != null ? true : false;
 
@@ -86,8 +86,8 @@ public class UserController {
 			session.setAttribute("authUser", authUser);
 			return "redirect:/";
 		} else {
-			model.addAttribute("message", "로그인 실패");
-			model.addAttribute("message", "아이디/패스워드를 확인해 주세요");
+			model.addAttribute("message1", "로그인 실패");
+			model.addAttribute("message2", "아이디/패스워드를 확인해 주세요");
 			return "redirect:/users/loginform";
 		}
 	}
