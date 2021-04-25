@@ -12,7 +12,7 @@
 <script src = "<c:url value="/assets/javascript/users.js"/>"></script>
 <body>
 
-	<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+	<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
 
 				
 				

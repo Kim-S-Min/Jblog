@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitacademy.jblog.service.BlogService;
+import com.bitacademy.jblog.service.FileUploadService;
+import com.bitacademy.jblog.service.UserService;
 import com.bitacademy.jblog.vo.BlogVo;
 import com.bitacademy.jblog.vo.CategoryVo;
 import com.bitacademy.jblog.vo.PostVo;
@@ -28,14 +30,20 @@ import com.bitacademy.jblog.vo.UserVo;
 public class BlogController {
 	@Autowired
 	BlogService blogService;
+	
+	@Autowired
+	UserService userServiceImpl;
+	
+	@Autowired
+	FileUploadService fileUploadService;
 
 	@RequestMapping("{userpage}")
 	public String view(@PathVariable("userpage") String id, HttpSession session, Model model) {
 		BlogVo vo = blogService.getPage(id);
 		model.addAttribute("vo", vo);
-		List<PostVo> postList = postService.getPost(vo.getUserNo());
+		List<PostVo> postList = blogService.getPost(vo.getUserNo());
 		model.addAttribute("postList", postList);
-		List<CategoryVo> cateList = postService.getCate(vo.getUserNo());
+		List<CategoryVo> cateList = blogService.getCate(vo.getUserNo());
 		model.addAttribute("cateList", cateList);
 		
 		return "blog/home";

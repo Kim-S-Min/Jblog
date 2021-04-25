@@ -3,7 +3,7 @@ package com.bitacademy.jblog.vo;
 import java.util.Date;
 
 public class CommentsVo {
-	private Long commentNo;
+	private Long commentsNo;
 	private Long postNo;
 	private Long userNo;
 	private String commentsContent;
@@ -11,11 +11,11 @@ public class CommentsVo {
 	private String userName;
 	
 	//	Getter/Setter
-	public Long getCommentNo() {
-		return commentNo;
+	public Long getCommentsNo() {
+		return commentsNo;
 	}
-	public void setCommentNo(Long commentNo) {
-		this.commentNo = commentNo;
+	public void setCommenstNo(Long commentNo) {
+		this.commentsNo = commentNo;
 	}
 	public Long getPostNo() {
 		return postNo;
@@ -51,7 +51,7 @@ public class CommentsVo {
 	//	toString
 	@Override
 	public String toString() {
-		return "CommentsVo [commentNo=" + commentNo + ", postNo=" + postNo + ", userNo=" + userNo + ", commentsContent="
+		return "CommentsVo [commentsNo=" + commentsNo + ", postNo=" + postNo + ", userNo=" + userNo + ", commentsContent="
 				+ commentsContent + ", regDate=" + regDate + ", userName=" + userName + "]";
 	}
 	

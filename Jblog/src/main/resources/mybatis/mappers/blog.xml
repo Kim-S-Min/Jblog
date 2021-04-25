@@ -1,41 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
 <mapper namespace="blog">
-	<select id="getPage" parameterType="String" resultType="userVo" >
-		<![CDATA[
-		SELECT userNo, userName, id
-		FROM users
-		WHERE id = #{value}
-		]]>
-	</select>
-	
-	<select id="getPost" parameterType="Long" resultType="postVo">
-		<![CDATA[
-		SELECT postTitle, postContent, post.regDate as regDate, post.cateNo
-		FROM post, category
-		WHERE category.userNo = ${value} AND post.cateNo = category.cateNo
-		ORDER BY postNo DESC
-		]]>
-	</select>
-	
-	<select id="selectCategory" parameterType = "Long" resultType = "categoryVo">
-		<![CDATA[
-		SELECT cateName, userNo ,cateNo, description, regDate
-		FROM category
-		WHERE userNo = #{value}
-		]]>
-	</select>
-	
-	<select id="getPostCount" parameterType="Long" resultType ="Long">
-		<![CDATA[
-		SELECT COUNT(postTitle)
-		FROM post
-		WHERE cateNo = #{value}
-		]]>
-	</select>
-	
 	<select id="adminBlog" parameterType="String" resultType="blogVo">
 		<![CDATA[
 		SELECT userNo, blogTitle, logoFile
@@ -60,33 +26,11 @@
 		]]>
 	</update>
 	
-	<insert id="insertCate" parameterType="categoryVo">
-		<![CDATA[
-		INSERT INTO category
-		VALUES(SEQ_CATEGORY_NO.NEXTVAL, #{userNo}, #{cateName}, #{description}, sysdate)
-		]]>
-	</insert>
-	
-	<insert id="write" parameterType="postVo">
-		<![CDATA[
-		INSERT INTO post
-		VALUES(SEQ_PoST_NO.NEXTVAL, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
-		]]>
-	</insert>
-	
-	<delete id = "deleteCate" parameterType = "Long">
-		<![CDATA[
-		DELETE
-		FROM category
-		WHERE cateNo = #{value}
-		]]>
-	</delete>
-	
-		<insert id ="insertComments" parameterType = "CommentsVo">
-		<![CDATA[
-		INSERT INTO comments
-		VALUES (SEQ_COMMENTS_NO.NEXTVAL, #{postNo},#{userNo}, #{cmtContent}, sysdate)
-		]]>
+	<insert id ="insertComments" parameterType = "CommentsVo">
+	<![CDATA[
+	INSERT INTO comments
+	VALUES (SEQ_COMMENTS_NO.NEXTVAL, #{postNo},#{userNo}, #{cmtContent}, sysdate)
+	]]>
 	</insert>
 	
 	<delete id ="deleteComments" parameterType = "Long">
@@ -103,5 +47,60 @@
 		FROM comments
 		WHERE postNo = #{value}
 		]]>
+	</select>
+	
+	<select id="selectCategory" parameterType = "Long" resultType = "categoryVo">
+	<![CDATA[
+	SELECT cateName, userNo ,cateNo, description, regDate
+	FROM category
+	WHERE userNo = #{value}
+	]]>
+	</select>
+
+	<insert id="insertCate" parameterType="categoryVo">
+	<![CDATA[
+	INSERT INTO category
+	VALUES(SEQ_CATEGORY_NO.NEXTVAL, #{userNo}, #{cateName}, #{description}, sysdate)
+	]]>
+	</insert>
+	
+	<delete id = "deleteCate" parameterType = "Long">
+	<![CDATA[
+	DELETE
+	FROM category
+	WHERE cateNo = #{value}
+	]]>
+	</delete>
+	
+	<select id="getPost" parameterType="Long" resultType="postVo">
+	<![CDATA[
+	SELECT postTitle, postContent, post.regDate as regDate, post.cateNo
+	FROM post, category
+	WHERE category.userNo = ${value} AND post.cateNo = category.cateNo
+	ORDER BY postNo DESC
+	]]>
+	</select>
+	
+	<select id="getPostCount" parameterType="Long" resultType ="Long">
+	<![CDATA[
+	SELECT COUNT(postTitle)
+	FROM post
+	WHERE cateNo = #{value}
+	]]>
+	</select>
+	
+	<insert id="write" parameterType="postVo">
+	<![CDATA[
+	INSERT INTO post
+	VALUES(SEQ_PoST_NO.NEXTVAL, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+	]]>
+	</insert>
+	
+	<select id="getPage" parameterType="String" resultType="userVo" >
+	<![CDATA[
+	SELECT userNo, userName, id
+	FROM users
+	WHERE id = #{value}
+	]]>
 	</select>
 </mapper>

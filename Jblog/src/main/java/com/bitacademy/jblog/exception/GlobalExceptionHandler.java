@@ -13,6 +13,7 @@ public class GlobalExceptionHandler {
 	public ModelAndView handleControllerException(ControllerException e) {
 		System.err.println("-------------");
 		System.err.println("ControllerAdvice에 의한 Error Handling");
+		e.printStackTrace();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("name", e.getClass().getSimpleName());

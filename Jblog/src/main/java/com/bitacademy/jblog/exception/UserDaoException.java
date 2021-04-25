@@ -9,8 +9,8 @@ public class UserDaoException extends RuntimeException {
 		
 	}
 	
-	public UserDaoException(String id) {
-		super(id);
+	public UserDaoException(String message) {
+		super(message);
 	}
 	
 	public UserDaoException(String message, UserVo userVo) {
@@ -18,7 +18,6 @@ public class UserDaoException extends RuntimeException {
 		this.userVo = userVo;
 	}
 
-	//	Getter/Setter
 	public UserVo getUserVo() {
 		return userVo;
 	}

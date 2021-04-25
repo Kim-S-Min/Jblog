@@ -14,7 +14,6 @@ public class ControllerException extends RuntimeException{
 		this.req = req;
 	}
 
-	//	Getter / Setter
 	public HttpServletRequest getReq() {
 		return req;
 	}

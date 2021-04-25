@@ -33,7 +33,7 @@ public class UserController {
 	
 
 	@RequestMapping(value = {"", "/", "/join"}, method = RequestMethod.GET)
-	public String join(@ModelAttribute UserVo userVo) {
+	public String join() {
 		return "users/joinform";
 	}
 	
@@ -64,7 +64,7 @@ public class UserController {
 	@RequestMapping("/idcheck")
 	public Object existsId(@RequestParam(value = "id", required = false, defaultValue = "") String id) {
 		UserVo vo = userService.getUser(id);
-		boolean exists = vo != null ? true : false;
+		boolean exists = vo != null? true:false;
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", "success");

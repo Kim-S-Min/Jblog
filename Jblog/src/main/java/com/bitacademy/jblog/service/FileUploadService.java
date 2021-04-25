@@ -6,8 +6,10 @@ import java.util.Calendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public class FileUploadService {
 	private static String SAVE_PATH = "D:/upload";
 	private static Logger logger = LoggerFactory.getLogger(FileUploadService.class);

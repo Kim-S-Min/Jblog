@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao {
 		UserVo vo = null;
 		
 		try {
-			vo = sqlSession.selectOne("users.selectUserByIDAndPassword", userMap);
+			vo = sqlSession.selectOne("users.selectUserByIdAndPassword", userMap);
 		}catch(Exception e){
 			throw new UserDaoException("selectUser By id and password exception");
 		}
@@ -78,9 +78,9 @@ public class UserDaoImpl implements UserDao {
 		UserVo vo = null; 
 		
 		try {
-			vo = sqlSession.selectOne("users.selectUserByID", id);
+			vo = sqlSession.selectOne("users.selectUserById", id);
 		}catch(Exception e){
-			throw new UserDaoException("selectUser By ID exception");
+			throw new UserDaoException("selectUser By Id exception");
 		}	
 		
 		return vo;
