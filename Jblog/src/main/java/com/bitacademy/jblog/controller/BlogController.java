@@ -52,14 +52,18 @@ public class BlogController {
 	FileUploadService fileUploadService;
 
 	@RequestMapping("{userpage}")
-	public String view(@PathVariable("userpage") String id, HttpSession session, Model model) {
+	public String view(
+			@PathVariable("userpage") 
+			String id, HttpSession session, Model model) {
 		BlogVo vo = blogService.getPage(id);
+		
+		UserVo pageId = userService.getUser(id);
+		model.addAttribute("pageId", pageId);
 		model.addAttribute("vo", vo);
 		List<PostVo> postList = postService.getPost(vo.getUserNo());
 		model.addAttribute("postList", postList);
 		List<CategoryVo> cateList = categoryService.getCate(vo.getUserNo());
 		model.addAttribute("cateList", cateList);
-		
 		return "blog/home";
 	}
 	
@@ -71,6 +75,9 @@ public class BlogController {
 		BlogVo vo = blogService.getPage(id);
 		model.addAttribute("vo", vo);
 		
+		UserVo pageId= userService.getUser(id);  
+		model.addAttribute("pageId", pageId);
+		
 		List<PostVo> postList = postService.getPost(vo.getUserNo());
 		List<PostVo> newList = new ArrayList<>();
 		
@@ -80,13 +87,23 @@ public class BlogController {
 			}
 		}
 		
+		List<CommentsVo> l = new ArrayList<>();
+		System.out.println(newList.toString());
+		if(!newList.isEmpty()) {
+			l = commentsService.getComments(newList.get(0).getPostNo());
+			for(CommentsVo e : l) {
+				String x = userService.selectUserName(e.getUserNo());
+				e.setUserName(x);
+			}
+			model.addAttribute("commentList", l);
+		}
+		
 		model.addAttribute("postList", newList);
 		List<CategoryVo> list = categoryService.getCate(vo.getUserNo());
 		model.addAttribute("cateList", list);
 		
 		return "blog/home";
 	}
-	
 	
 	
 	@RequestMapping("{userpage}/admin/basic")
@@ -166,12 +183,12 @@ public class BlogController {
 	
 	@RequestMapping(value="{userpage}/insertcomments", method=RequestMethod.POST)
 	public String commentsAction(
-			@ModelAttribute CommentsVo updateVo, 
+			@ModelAttribute CommentsVo commentsVo, 
 			@PathVariable("userpage") 
 			String id, Model model, HttpSession session) {
-		boolean success = commentsService.insertComments(updateVo);
-		UserVo PageId=userService.getUser(id);
-		model.addAttribute("PageId", PageId);
+		boolean success = commentsService.insertComments(commentsVo);
+		UserVo pageId=userService.getUser(id);
+		model.addAttribute("pageId", pageId);
 		
 		if(success) {
 			return "redirect:/{userpage}";
@@ -194,5 +211,30 @@ public class BlogController {
 		}else {
 			return "redirect:/";
 		}
+	}
+	
+	@RequestMapping(value = "{userpage}/admin/update", method = RequestMethod.GET)
+	public String basicAction(
+			@ModelAttribute BlogVo updatedVo, 
+			@RequestParam("file") MultipartFile uploadfile, Model model) {
+		BlogVo vo = blogService.getBlogAdmin(updatedVo.getUserNo());
+		vo.setBlogTitle(updatedVo.getBlogTitle());
+		
+		if(!uploadfile.getOriginalFilename().equals("")) {
+			String saveFileName = fileUploadService.store(uploadfile);
+			String urlImage = "upload-images/" + saveFileName;
+			
+			vo.setLogoFile(urlImage);
+		}
+		
+		
+		boolean success = blogService.update(vo);
+		
+		if(success) {
+			return "redirect:/{userpage}";
+		}else {
+			return "redirect:{userpage}/admin/basic";
+		}
+
 	}
 }
