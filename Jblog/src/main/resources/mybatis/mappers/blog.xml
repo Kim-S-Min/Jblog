@@ -96,11 +96,5 @@
 	]]>
 	</insert>
 	
-	<select id="getPage" parameterType="String" resultType="userVo" >
-	<![CDATA[
-	SELECT userNo, userName, id
-	FROM users
-	WHERE id = #{value}
-	]]>
-	</select>
+	
 </mapper>
