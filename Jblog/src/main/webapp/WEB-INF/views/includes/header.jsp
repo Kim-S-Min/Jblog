@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 
 	prefix="c" %>
-<div class = "container">	
+<div class = "container">
+	<div class = "row text-center">
+		<img src="${pageContext.request.contextPath }/logos/logo.png">
+	</div>	
 	<div class = "row">
 		<ul>
 			<c:choose>

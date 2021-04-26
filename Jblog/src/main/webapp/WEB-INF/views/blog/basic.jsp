@@ -23,7 +23,7 @@
 		<label>로고이미지</label>			
 			<img src="${pageContext.request.contextPath}/${vo.getLogoFile()}">
 			<input type="file" id = "file" name="file" >		
-			<input class = "btn btn-secondary" value="기본설정변경">
+			<input class = "btn btn-secondary" type="submit" value="기본설정변경">
 	</form>
 </body>
 </html>

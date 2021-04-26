@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitacademy.jblog.service.BlogService;
+import com.bitacademy.jblog.service.CategoryService;
+import com.bitacademy.jblog.service.CommentsService;
 import com.bitacademy.jblog.service.FileUploadService;
+import com.bitacademy.jblog.service.PostService;
 import com.bitacademy.jblog.service.UserService;
 import com.bitacademy.jblog.vo.BlogVo;
 import com.bitacademy.jblog.vo.CategoryVo;
@@ -32,7 +35,16 @@ public class BlogController {
 	BlogService blogService;
 	
 	@Autowired
-	UserService userServiceImpl;
+	UserService userService;
+	
+	@Autowired
+	PostService postService;
+	
+	@Autowired
+	CategoryService categoryService;
+	
+	@Autowired
+	CommentsService commentsService;
 	
 	@Autowired
 	FileUploadService fileUploadService;
@@ -41,9 +53,9 @@ public class BlogController {
 	public String view(@PathVariable("userpage") String id, HttpSession session, Model model) {
 		BlogVo vo = blogService.getPage(id);
 		model.addAttribute("vo", vo);
-		List<PostVo> postList = blogService.getPost(vo.getUserNo());
+		List<PostVo> postList = postService.getPost(vo.getUserNo());
 		model.addAttribute("postList", postList);
-		List<CategoryVo> cateList = blogService.getCate(vo.getUserNo());
+		List<CategoryVo> cateList = categoryService.getCate(vo.getUserNo());
 		model.addAttribute("cateList", cateList);
 		
 		return "blog/home";
@@ -57,7 +69,7 @@ public class BlogController {
 		BlogVo vo = blogService.getPage(id);
 		model.addAttribute("vo", vo);
 		
-		List<PostVo> postList = blogService.getPost(vo.getUserNo());
+		List<PostVo> postList = postService.getPost(vo.getUserNo());
 		List<PostVo> newList = new ArrayList<>();
 		
 		for(PostVo e : postList) {
@@ -67,7 +79,7 @@ public class BlogController {
 		}
 		
 		model.addAttribute("postList", newList);
-		List<CategoryVo> list = blogService.getCate(vo.getUserNo());
+		List<CategoryVo> list = categoryService.getCate(vo.getUserNo());
 		model.addAttribute("cateList", list);
 		
 		return "blog/home";
@@ -94,7 +106,7 @@ public class BlogController {
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		BlogVo vo = blogService.getBlogAdmin(id);
 		model.addAttribute("vo", vo);
-		List<CategoryVo> list = blogService.getCate(authUser.getUserNo());
+		List<CategoryVo> list = categoryService.getCate(authUser.getUserNo());
 		model.addAttribute("list", list);
 		
 		return "blog/category";
@@ -104,7 +116,7 @@ public class BlogController {
 	public String categoryAction(@ModelAttribute CategoryVo insertVo, HttpSession session, Model model) {
 		UserVo vo = (UserVo)session.getAttribute("authUser");
 		model.addAttribute("authUser", vo);
-		boolean success = blogService.insertCate(insertVo);
+		boolean success = categoryService.insertCate(insertVo);
 
 		return "redirect:/{sitename}";
 	}
@@ -117,7 +129,7 @@ public class BlogController {
 		if (authUser == null) {
 			return "redirect:/";
 		}
-		List<CategoryVo> list = blogService.getCate(authUser.getUserNo());
+		List<CategoryVo> list = categoryService.getCate(authUser.getUserNo());
 		model.addAttribute("list", list);
 
 		return "blog/write";
@@ -129,7 +141,7 @@ public class BlogController {
 		if (authUser == null) {
 			return "redirect:/{userblog}";
 		}		
-		boolean success = blogService.write(vo);
+		boolean success = postService.write(vo);
 		if(success) {
 			return "redirect:/{userblog}";
 		} else {
@@ -141,7 +153,7 @@ public class BlogController {
 	@RequestMapping("/show")
 	public Object existEmail(
 			@RequestParam(value = "no", required=false, defaultValue="") Long no){
-		List<PostVo> list = blogService.getPost(no);
+		List<PostVo> list = postService.getPost(no);
 		Map<String, Object> map = new HashMap<>();
 		map.put("data", list);
 		

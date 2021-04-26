@@ -4,7 +4,7 @@ function checkForm(frm) {
 	var username = frm.username.value.trim();
 	var id = frm.id.value.trim();
 	var password = frm.password.value.trim();
-	var check = frm = frm.chech.value;
+	var check = frm.chech.value;
 	var agree = document.getElementsByName('agree');
 	
 	if (username.length == 0) {
@@ -27,15 +27,15 @@ function checkForm(frm) {
 	return false;
 }
 
-function checkid(idFiel, url) {
-	console.log("id field:", idField.value);
+function checkid(idfiel, url) {
+	console.log("id field:", idfield.value);
 	
 	$.ajax({
 		url: url,
 		type: "GET",
 		dataType: "json",
 		data: {
-			id: idField.value.trim()
+			id: idfield.value.trim()
 		},
 		succuss: function(result) {
 			console.log("Result:", result);
@@ -52,7 +52,7 @@ function checkid(idFiel, url) {
 		cnosole.error("Response:", xhr);
 		console.error("Error:", error);
 		
-		idField.form.check.value = "f";
+		idfield.form.check.value = "f";
 		}
 	});
 }
