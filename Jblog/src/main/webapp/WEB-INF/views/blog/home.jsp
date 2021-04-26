@@ -29,20 +29,20 @@
 								<input type="hidden" name = "postNo" id = "postNo" value = "${postList[0].getPostNo()}">
 								<input type="hidden" name = "userNo" id = "userNo" value = "${authUser.getUserNo() }">
 								<label>${authUser.getUserName() }</label>
-								<input type="text" name = "cmtContent" id ="cmtContent">
+								<input type="text" name = "commentsContent" id ="commentsContent">
 								<input type="submit" value = "코멘트작성">
 							</form>	
 						</c:when>
 					</c:choose>
-					<c:forEach items="${commentList}" var="commentsList">
-						<p>${commentList.getUserName() }</p>
-						<p>${commentList.getCmtContent() }</p>
-						<p>${commentList.getRegDate() }</p>
+					<c:forEach items="${commenstList}" var="commentsList">
+						<p>${commentsList.getUserName() }</p>
+						<p>${commentsList.getCmtContent() }</p>
+						<p>${commentsList.getRegDate() }</p>
 						<P>
 						<c:choose>
-							<c:when test = "${commentList.getUserNo() == authUser.getUserNo() }">
+							<c:when test = "${commentsList.getUserNo() == authUser.getUserNo() }">
 							<form method="post" action="<c:url value="${userblogId.getId()}/deletecomments"/>">
-							<input type='hidden' id = "no" name="no" value="${commentList.getCmtNo()}">
+							<input type='hidden' id = "no" name="no" value="${commentsList.getCmtNo()}">
 							<input class ="btn btn-danger" type="submit" value="삭제">
 							</form>
 							</c:when>

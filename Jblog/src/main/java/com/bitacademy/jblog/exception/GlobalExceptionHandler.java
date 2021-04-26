@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(UserDaoException.class)
-	public ModelAndView handleMemberDaoException(UserDaoException e) {
+	public ModelAndView handleUserDaoException(UserDaoException e) {
 		System.err.println("UserDaoException:" + e.getMessage());
 		e.printStackTrace();
 		System.err.println("UserVo:" + e.getUserVo());
