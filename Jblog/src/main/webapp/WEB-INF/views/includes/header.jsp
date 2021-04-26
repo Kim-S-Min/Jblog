@@ -4,7 +4,7 @@
 	prefix="c" %>
 <div class = "container">
 	<div class = "row text-center">
-		<img src="${pageContext.request.contextPath }/logos/logo.png">
+		<img src="${pageContext.request.contextPath }/logos/logo.png" width="500" height="500">
 	</div>	
 	<div class = "row">
 		<ul>

@@ -18,7 +18,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, 
 			Object handler)
 			throws Exception {
-		logger.debug("AuthInterceptor");
+		logger.debug("AuthInterceptor log");
 		HttpSession session = request.getSession();
 		UserVo authUser = null;
 

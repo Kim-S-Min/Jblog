@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>JBlog</title>
 </head>
-<script src = "<c:url value="/assets/javascript/jquery/jquery-3.6.0.js"/>"></script>
-<script src = "<c:url value="/assets/javascript/users.js"/>"></script>
+<script src="<c:url value="/assets/javascript/jquery/jquery-3.6.0.js"/>"></script>
+<script src="<c:url value="/assets/javascript/users.js"/>"></script>
 <body>
 
 	<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
@@ -18,7 +18,8 @@
 	<form id="login-form" 
 		name="loginform" 
 		method="POST" 
-		action="<c:url value="/users/login"/>">
+		action="<c:url value="/users/login"/>"
+		onsubmit="return checkId(this)">
 		
 		<label class="block-label" for="id">아이디</label> 
 		<input id="id" name="id" type="text" value=""><br>
